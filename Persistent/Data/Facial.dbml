@@ -32,6 +32,7 @@
       <Column Name="DATEOFBIRTH" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="WORKSTATUS" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="REFERENCENUMBER" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="PROFILE" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
     </Type>
   </Table>
 </Database>

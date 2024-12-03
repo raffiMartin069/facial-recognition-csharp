@@ -1,25 +1,24 @@
-﻿using Emgu.CV.CvEnum;
-using Emgu.CV;
+﻿using Emgu.CV;
 using facial_recognition.Dto;
 using facial_recognition.Enums;
 using facial_recognition.Repository;
 using facial_recognition.Utility;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace facial_recognition.Model
 {
-	public class Register
+	public class Update
 	{
+		private readonly DashboardRepository _repo = new DashboardRepository();
 
-		private readonly RegisterRepository _repo = new RegisterRepository();
-
-		public Register(string fullname, string address, string email, string phone, string age, string gender, string guardian, string civilStatus, string workStatus, string dateOfBirth, byte[] profileImage)
+		public Update(string fullname, string address, string email, string phone, string age, string gender, string guardian, string civilStatus, string workStatus, string dateOfBirth, int id)
 		{
 			Fullname = fullname;
 			Address = address;
@@ -31,9 +30,10 @@ namespace facial_recognition.Model
 			CivilStatus = civilStatus;
 			WorkStatus = workStatus;
 			DateOfBirth = dateOfBirth;
-			ProfileImage = profileImage;
+			Id = id;
 		}
 
+		public int Id { get; private set; }
 		public string Fullname { get; private set; }
 		public string Address { get; private set; }
 		public string Email { get; private set; }
@@ -45,13 +45,13 @@ namespace facial_recognition.Model
 		public string WorkStatus { get; private set; }
 		public string DateOfBirth { get; private set; }
 		public string ReferenceNumber { get; private set; }
-		public byte[] ProfileImage { get; private set; }
 
-		public void AddUser()
+		public bool UpdateUser()
 		{
 			Validate();
-			var dto = new RegisterDto
+			var dto = new UpdateUserDto
 				(
+					id: Id,
 					fullname: Fullname,
 					address: Address,
 					email: Email,
@@ -61,17 +61,11 @@ namespace facial_recognition.Model
 					guardian: Guardian,
 					civilStatus: CivilStatus,
 					workStatus: WorkStatus,
-					dateOfBirth: DateTime.Parse(DateOfBirth).Date,
-					referenceNumber: GenerateReferenceNumber(),
-					profileImage: ProfileImage
+					dateOfBirth: DateTime.Parse(DateOfBirth).Date
 				);
-			_repo.AddUser(dto);
+			return _repo.UpdateUser(dto);
 		}
 
-		public string GenerateReferenceNumber()
-		{
-			return Guid.NewGuid().ToString();
-		}
 
 		private void Validate()
 		{
@@ -80,7 +74,7 @@ namespace facial_recognition.Model
 
 			if (string.IsNullOrEmpty(Address))
 				throw new Exception("Address is required.");
-			
+
 			ValidateEmail();
 
 			ValidatePhoneNumber();
@@ -91,11 +85,10 @@ namespace facial_recognition.Model
 
 			if (string.IsNullOrEmpty(Guardian))
 				throw new Exception("Guardian is required.");
-			
+
 			ValidateCivilStatus();
 			ValidateWorkStatus();
 			ValidateDateOfBirth();
-			ValidateImage();
 		}
 
 		private void ValidateGender()
@@ -152,7 +145,7 @@ namespace facial_recognition.Model
 		{
 			if (string.IsNullOrEmpty(WorkStatus))
 				throw new Exception("Work Status is required.");
-		
+
 			if (!Enum.TryParse(WorkStatus, out WorkStatusEnum workStatus))
 			{
 				if (WorkStatus == "Working Student") return;
@@ -178,62 +171,8 @@ namespace facial_recognition.Model
 			// check date of birth and age calculation if both matches
 			// example: today is December of 2024, the users age and date of birth should be 23 should be April 17, 2001
 			// if the date and year is April 17, 2025 then the age should be 24 if he/she is born in April 17, 2001.
-			if (DateTime.Now.Year - dob.Year != Convert.ToInt32(Age))
+			if(DateTime.Now.Year - dob.Year != Convert.ToInt32(Age))
 				throw new Exception("Invalid Date of Birth.");
 		}
-
-		private void ValidateImage()
-		{
-			if (ProfileImage == null)
-				throw new Exception("Profile Image is required.");
-
-			if (ProfileImage.Length == 0)
-				throw new Exception("Profile Image is required.");
-
-			if (ProfileImage.Length > 1000000)
-				throw new Exception("Profile Image is too large.");
-
-			if (ProfileImage.Length < 1000)
-				throw new Exception("Profile Image is too small.");
-			try
-			{
-				var facesInsideDatabase = GetUserImage();
-
-				// Convert the uploaded profile image to a Mat
-				Mat uploadedFaceMat = RecognizerUtility.ByteArrayToMat(ProfileImage);
-
-				// Check for duplicates
-				foreach (var storedImage in facesInsideDatabase)
-				{
-					// Convert the stored image byte array to Mat
-					Mat storedFaceMat = RecognizerUtility.ByteArrayToMat(storedImage.ByteImage);
-
-					// Compare the two faces
-					double similarity = RecognizerUtility.CompareFaces(uploadedFaceMat, storedFaceMat);
-
-					// If similarity exceeds threshold, it's a duplicate
-					if (similarity >= 0.6)  // Threshold for face comparison (adjust as necessary)
-					{
-						throw new Exception("This face already exists in the database.");
-					}
-				}
-			}
-			catch(Exception ex)
-			{
-				throw ex;
-			}
-		}
-
-		private IEnumerable<ImageCacheDto> GetUserImage() => _repo.GetImage();
-
-		public static void SaveImage(byte[] imageBytes, string filePath)
-		{
-			using (var ms = new MemoryStream(imageBytes))
-			{
-				var image = Image.FromStream(ms);
-				image.Save(filePath, ImageFormat.Bmp);
-			}
-		}
-
 	}
 }

@@ -395,6 +395,8 @@ namespace facial_recognition.Persistent.Data
 		
 		private string _REFERENCENUMBER;
 		
+		private System.Data.Linq.Binary _PROFILE;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -423,6 +425,8 @@ namespace facial_recognition.Persistent.Data
     partial void OnWORKSTATUSChanged();
     partial void OnREFERENCENUMBERChanging(string value);
     partial void OnREFERENCENUMBERChanged();
+    partial void OnPROFILEChanging(System.Data.Linq.Binary value);
+    partial void OnPROFILEChanged();
     #endregion
 		
 		public USER()
@@ -666,6 +670,26 @@ namespace facial_recognition.Persistent.Data
 					this._REFERENCENUMBER = value;
 					this.SendPropertyChanged("REFERENCENUMBER");
 					this.OnREFERENCENUMBERChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PROFILE", DbType="VarBinary(MAX) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary PROFILE
+		{
+			get
+			{
+				return this._PROFILE;
+			}
+			set
+			{
+				if ((this._PROFILE != value))
+				{
+					this.OnPROFILEChanging(value);
+					this.SendPropertyChanging();
+					this._PROFILE = value;
+					this.SendPropertyChanged("PROFILE");
+					this.OnPROFILEChanged();
 				}
 			}
 		}

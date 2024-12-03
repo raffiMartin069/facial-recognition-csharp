@@ -5,7 +5,6 @@ using Emgu.CV.Util;
 using facial_recognition.Model;
 using facial_recognition.Persistent.Data;
 using facial_recognition.Utility;
-using facial_recognition.View;
 using System;
 using System.Configuration;
 using System.Drawing;
@@ -24,16 +23,15 @@ namespace facial_recognition
 		private bool _isCameraRunning;
 		private readonly string FRONTAL = ConfigurationManager.AppSettings["FRONTAL_FACE_CASCADE"];
 		private readonly string EYE = ConfigurationManager.AppSettings["EYE_CASCADE"];
-		private readonly string BASE_PATH = AppDomain.CurrentDomain.BaseDirectory.Replace(@"\bin\Debug", "");
+		private readonly string BASE_PATH = AppDomain.CurrentDomain.BaseDirectory.Replace(@"bin\Debug", "");
 		private byte[] imageBytes;
 
 		public RegisterForm()
 		{
 			InitializeComponent();
-			string eyeCascadePath = Path.Combine(BASE_PATH, EYE);
-			string faceCascadePath = Path.Combine(BASE_PATH, FRONTAL);
-			var faceDetector = new CascadeClassifier(faceCascadePath);
-			var eyeDetector = new CascadeClassifier(eyeCascadePath);
+			string eyePath = BASE_PATH + EYE;
+			var faceDetector = new CascadeClassifier(BASE_PATH + FRONTAL);
+			var eyeDetector = new CascadeClassifier(eyePath);
 			_recognizerUtility = new RecognizerUtility(faceDetector, eyeDetector);
 			_faceRecognizer = new EigenFaceRecognizer(); // or FisherFaceRecognizer, LBPHFaceRecognizer
 		}
@@ -90,8 +88,6 @@ namespace facial_recognition
 				_camera.Start();
 				_isCameraRunning = true;
 			}
-
-			CaptureButton.Enabled = true;
 		}
 
 		private void CaptureButton_Click(object sender, EventArgs e)
@@ -108,23 +104,28 @@ namespace facial_recognition
 
 				if (faces != null)
 				{
-					// Convert the first detected face to Bitmap and then to byte array
+					// Prepare training data
+					var faceImages = new VectorOfMat();
+					faceImages.Push(grayImage.Mat); // Add the detected face to the training set
+
+					int[] labels = { 1 }; // Example label for the captured face
+
+					// Train the recognizer
+					_faceRecognizer.Train(faceImages, new VectorOfInt(labels));
+					MessageBox.Show("Face captured and trained!");
+
+					// Convert the image to Bitmap
+					Bitmap bitmap = ConvertToBitmap(image);
+
+					// Save Bitmap to byte array
+					
 					using (var ms = new MemoryStream())
 					{
-						using (Bitmap bitmap = ConvertToBitmap(image))
-						{
-							bitmap.Save(ms, ImageFormat.Png); // Save in PNG format
-							imageBytes = ms.ToArray();
-						}
+						bitmap.Save(ms, ImageFormat.Bmp);
+						imageBytes = ms.ToArray();
 					}
 
-					MessageBox.Show("Face captured successfully!");
-					RegisterButton.Enabled = true;
-				}
-				else
-				{
-					MessageBox.Show("No face detected. Please try again.");
-					RegisterButton.Enabled = false;
+					// You can now use the byte array (imageBytes) as needed
 				}
 			}
 		}
@@ -146,33 +147,6 @@ namespace facial_recognition
 				ErrorLabel.Text = ex.Message;
 				ErrorLabel.Visible = true;
 			}
-		}
-
-		private void ClearFieldButton_Click(object sender, EventArgs e)
-		{
-			var login = new LoginForm();
-			login.Show();
-			this.Hide();
-		}
-
-		private void Clear()
-		{
-			FullnameTextBox.Clear();
-			AddressTextBox.Clear();
-			EmailTextBox.Clear();
-			PNumberTextBox.Clear();
-			AgeTextBox.Clear();
-			GenderComboBox.SelectedIndex = -1;
-			GuardianTextBox.Clear();
-			CivilStatusComboBox.SelectedIndex = -1;
-			WorkStatusComboBox.SelectedIndex = -1;
-			DateOfBirthTextBox.Text = "";
-			pictureBox1.Image = null;
-			RegisterButton.Enabled = false;
-			ErrorLabel.Visible = false;
-
-			if (imageBytes != null)
-				imageBytes.Cast<byte>().ToList().Clear();
 		}
 	}
 }

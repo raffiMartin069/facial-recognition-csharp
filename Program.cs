@@ -1,4 +1,5 @@
-﻿using System;
+﻿using facial_recognition.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,9 @@ namespace facial_recognition
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new RegisterForm());
+			//Application.Run(new RegisterForm());
+			Application.Run(new LoginForm());
+			//Application.Run(new DashboardForm());
 		}
 	}
 }
