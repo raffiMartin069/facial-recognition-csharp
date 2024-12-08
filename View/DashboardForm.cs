@@ -84,6 +84,7 @@ namespace facial_recognition.View
 				pictureBox1.Image = i.ProfileImage;
 				Id = i.Id;
 				UpdateButton.Enabled = true;
+				ReferenceNumberTextBox.Text = i.ReferenceNumber;
 			}
 		}
 
@@ -93,8 +94,12 @@ namespace facial_recognition.View
 			{
 				ErrorLabel.Visible = false;
 				var model = new Update
-				(FullnameTextBox.Text, AddressTextBox.Text, EmailTextBox.Text, PNumberTextBox.Text,
-				AgeTextBox.Text, GenderComboBox.Text, GuardianTextBox.Text, CivilStatusComboBox.Text, WorkStatusComboBox.Text, DateOfBirthTextBox.Text, Id);
+				(
+					FullnameTextBox.Text, AddressTextBox.Text, EmailTextBox.Text,
+				PNumberTextBox.Text, AgeTextBox.Text, GenderComboBox.Text,
+				GuardianTextBox.Text, CivilStatusComboBox.Text, WorkStatusComboBox.Text,
+				DateOfBirthTextBox.Text, Id
+				);
 
 				bool isSuccess = model.UpdateUser();
 

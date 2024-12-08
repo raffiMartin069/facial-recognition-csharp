@@ -47,7 +47,7 @@ namespace facial_recognition.Model
 		public string ReferenceNumber { get; private set; }
 		public byte[] ProfileImage { get; private set; }
 
-		public void AddUser()
+		public string AddUser()
 		{
 			Validate();
 			var dto = new RegisterDto
@@ -65,7 +65,7 @@ namespace facial_recognition.Model
 					referenceNumber: GenerateReferenceNumber(),
 					profileImage: ProfileImage
 				);
-			_repo.AddUser(dto);
+			return _repo.AddUser(dto);
 		}
 
 		public string GenerateReferenceNumber()

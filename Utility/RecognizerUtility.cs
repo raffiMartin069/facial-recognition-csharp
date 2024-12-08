@@ -24,6 +24,33 @@ namespace facial_recognition.Utility
 			_eyeDetector = eyeDetector;
 		}
 
+		public Image<Bgr, byte> ToggleFaceAndEyeBoxes(Image<Bgr, byte> image)
+		{
+			var gray = image.Convert<Gray, byte>();
+			var faces = _faceDetector.DetectMultiScale(gray, 1.1, 10, new Size(30, 30), Size.Empty);
+
+			foreach (var face in faces)
+			{
+				image.Draw(face, new Bgr(Color.Red), 2);
+
+				var faceROI = gray.GetSubRect(face);
+				var eyes = _eyeDetector.DetectMultiScale(faceROI, 1.1, 10, new Size(10, 10), Size.Empty);
+
+				foreach (var eye in eyes)
+				{
+					var eyeRect = new Rectangle(
+						face.X + eye.X,
+						face.Y + eye.Y,
+						eye.Width,
+						eye.Height
+					);
+					image.Draw(eyeRect, new Bgr(Color.Green), 2);
+				}
+			}
+			return image;
+		}
+
+
 		public Image<Bgr, byte> DetectFace(Image<Bgr, byte> image)
 		{
 			var gray = image.Convert<Gray, byte>();

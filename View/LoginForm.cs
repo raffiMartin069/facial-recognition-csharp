@@ -133,6 +133,12 @@ namespace facial_recognition.View
 			var facesInsideDatabase = repo.GetFaces();
 			try
 			{
+				if(imageBytes == null)
+				{
+					MessageBox.Show("Please capture your face or wait for the camera to initialize.");
+					return;
+				}
+
 				// Convert the uploaded profile image to a Mat
 				Mat uploadedFaceMat = RecognizerUtility.ByteArrayToMat(imageBytes);
 
