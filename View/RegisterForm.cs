@@ -26,6 +26,8 @@ namespace facial_recognition
 		private readonly string EYE = ConfigurationManager.AppSettings["EYE_CASCADE"];
 		private readonly string BASE_PATH = AppDomain.CurrentDomain.BaseDirectory.Replace(@"\bin\Debug", "");
 		private byte[] imageBytes;
+		private bool _areBoxesVisible = false;
+
 
 		public RegisterForm()
 		{
@@ -62,9 +64,12 @@ namespace facial_recognition
 				Mat frame = new Mat();
 				_camera.Retrieve(frame);
 				var image = frame.ToImage<Bgr, byte>();
+				Image<Bgr, byte> processedImage = null;
+				if (!_areBoxesVisible)
+					processedImage = _recognizerUtility.DetectFace(image);
+				else
+					processedImage = _recognizerUtility.ToggleFaceAndEyeBoxes(image);
 
-				// Detect and display faces
-				var processedImage = _recognizerUtility.DetectFace(image);
 				pictureBox1.Image = ConvertToBitmap(processedImage);
 			}
 		}
@@ -92,10 +97,19 @@ namespace facial_recognition
 			}
 
 			CaptureButton.Enabled = true;
+			TestButton.Enabled = true;
+			StartCameraButton.Enabled = false;
 		}
 
 		private void CaptureButton_Click(object sender, EventArgs e)
 		{
+
+			if(_areBoxesVisible)
+			{
+				MessageBox.Show("NOTE: Please turn off Test Mode. The camera would capture the test boxes and would create unwanted bahaivior that might affect the end result.");
+				return;
+			}
+
 			if (_camera != null && _camera.Ptr != IntPtr.Zero)
 			{
 				Mat frame = new Mat();
@@ -186,6 +200,16 @@ namespace facial_recognition
 
 			if (imageBytes != null)
 				imageBytes.Cast<byte>().ToList().Clear();
+		}
+
+		private void TestButton_Click(object sender, EventArgs e)
+		{
+			_areBoxesVisible = !_areBoxesVisible;
+
+			if (_areBoxesVisible)
+				TestButton.Text = "Turn off Test Mode";
+			else
+				TestButton.Text = "Turn on Test Mode";
 		}
 	}
 }

@@ -74,8 +74,9 @@
 			this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-			this.StartCameraButton = new System.Windows.Forms.Button();
 			this.CaptureButton = new System.Windows.Forms.Button();
+			this.StartCameraButton = new System.Windows.Forms.Button();
+			this.TestButton = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.gENDERBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.facialDataSetBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.facialDataSet)).BeginInit();
@@ -577,7 +578,7 @@
 			this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
 			this.flowLayoutPanel2.Location = new System.Drawing.Point(595, 107);
 			this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-			this.flowLayoutPanel2.Size = new System.Drawing.Size(536, 510);
+			this.flowLayoutPanel2.Size = new System.Drawing.Size(540, 510);
 			this.flowLayoutPanel2.TabIndex = 1;
 			// 
 			// pictureBox1
@@ -595,17 +596,33 @@
 			this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.tableLayoutPanel3.AutoSize = true;
 			this.tableLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.tableLayoutPanel3.ColumnCount = 2;
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel3.ColumnCount = 3;
+			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel3.Controls.Add(this.CaptureButton, 2, 0);
 			this.tableLayoutPanel3.Controls.Add(this.StartCameraButton, 0, 0);
-			this.tableLayoutPanel3.Controls.Add(this.CaptureButton, 1, 0);
+			this.tableLayoutPanel3.Controls.Add(this.TestButton, 1, 0);
 			this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 466);
 			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
 			this.tableLayoutPanel3.RowCount = 1;
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel3.Size = new System.Drawing.Size(530, 41);
+			this.tableLayoutPanel3.Size = new System.Drawing.Size(534, 41);
 			this.tableLayoutPanel3.TabIndex = 3;
+			// 
+			// CaptureButton
+			// 
+			this.CaptureButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.CaptureButton.Enabled = false;
+			this.CaptureButton.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+			this.CaptureButton.Location = new System.Drawing.Point(359, 3);
+			this.CaptureButton.MinimumSize = new System.Drawing.Size(50, 35);
+			this.CaptureButton.Name = "CaptureButton";
+			this.CaptureButton.Size = new System.Drawing.Size(172, 35);
+			this.CaptureButton.TabIndex = 7;
+			this.CaptureButton.Text = "Capture";
+			this.CaptureButton.UseVisualStyleBackColor = true;
+			this.CaptureButton.Click += new System.EventHandler(this.CaptureButton_Click);
 			// 
 			// StartCameraButton
 			// 
@@ -614,25 +631,25 @@
 			this.StartCameraButton.Location = new System.Drawing.Point(3, 3);
 			this.StartCameraButton.MinimumSize = new System.Drawing.Size(100, 35);
 			this.StartCameraButton.Name = "StartCameraButton";
-			this.StartCameraButton.Size = new System.Drawing.Size(259, 35);
+			this.StartCameraButton.Size = new System.Drawing.Size(172, 35);
 			this.StartCameraButton.TabIndex = 6;
 			this.StartCameraButton.Text = "Start";
 			this.StartCameraButton.UseVisualStyleBackColor = true;
 			this.StartCameraButton.Click += new System.EventHandler(this.StartCameraButton_Click);
 			// 
-			// CaptureButton
+			// TestButton
 			// 
-			this.CaptureButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.CaptureButton.Enabled = false;
-			this.CaptureButton.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-			this.CaptureButton.Location = new System.Drawing.Point(268, 3);
-			this.CaptureButton.MinimumSize = new System.Drawing.Size(50, 35);
-			this.CaptureButton.Name = "CaptureButton";
-			this.CaptureButton.Size = new System.Drawing.Size(259, 35);
-			this.CaptureButton.TabIndex = 6;
-			this.CaptureButton.Text = "Capture";
-			this.CaptureButton.UseVisualStyleBackColor = true;
-			this.CaptureButton.Click += new System.EventHandler(this.CaptureButton_Click);
+			this.TestButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.TestButton.Enabled = false;
+			this.TestButton.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+			this.TestButton.Location = new System.Drawing.Point(181, 3);
+			this.TestButton.MinimumSize = new System.Drawing.Size(50, 35);
+			this.TestButton.Name = "TestButton";
+			this.TestButton.Size = new System.Drawing.Size(172, 35);
+			this.TestButton.TabIndex = 6;
+			this.TestButton.Text = "Turn on Test Mode";
+			this.TestButton.UseVisualStyleBackColor = true;
+			this.TestButton.Click += new System.EventHandler(this.TestButton_Click);
 			// 
 			// RegisterForm
 			// 
@@ -720,6 +737,7 @@
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
 		private System.Windows.Forms.Button StartCameraButton;
+		private System.Windows.Forms.Button TestButton;
 		private System.Windows.Forms.Button CaptureButton;
 	}
 }
