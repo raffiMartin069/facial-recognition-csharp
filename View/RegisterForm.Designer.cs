@@ -184,7 +184,7 @@
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 1;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 781F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 724F));
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(1184, 724);
 			this.tableLayoutPanel1.TabIndex = 5;
 			// 
@@ -497,6 +497,7 @@
 			this.label11.Size = new System.Drawing.Size(153, 21);
 			this.label11.TabIndex = 0;
 			this.label11.Text = "Reference Number";
+			this.label11.Visible = false;
 			// 
 			// ReferenceNumberTextBox
 			// 
@@ -507,6 +508,7 @@
 			this.ReferenceNumberTextBox.Name = "ReferenceNumberTextBox";
 			this.ReferenceNumberTextBox.Size = new System.Drawing.Size(377, 29);
 			this.ReferenceNumberTextBox.TabIndex = 1;
+			this.ReferenceNumberTextBox.Visible = false;
 			// 
 			// ErrorLabel
 			// 
@@ -547,7 +549,7 @@
 			this.ClearFieldButton.Name = "ClearFieldButton";
 			this.ClearFieldButton.Size = new System.Drawing.Size(183, 35);
 			this.ClearFieldButton.TabIndex = 6;
-			this.ClearFieldButton.Text = "Clear All Field";
+			this.ClearFieldButton.Text = "Return to Login";
 			this.ClearFieldButton.UseVisualStyleBackColor = true;
 			this.ClearFieldButton.Click += new System.EventHandler(this.ClearFieldButton_Click);
 			// 

@@ -65,12 +65,12 @@
 			this.label7.AutoSize = true;
 			this.label7.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
 			this.label7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.label7.Location = new System.Drawing.Point(272, 0);
+			this.label7.Location = new System.Drawing.Point(272, 12);
 			this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(260, 57);
+			this.label7.Size = new System.Drawing.Size(260, 32);
 			this.label7.TabIndex = 0;
-			this.label7.Text = "Create an Acccount Today!";
+			this.label7.Text = "Welcome back! ";
 			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// tableLayoutPanel1

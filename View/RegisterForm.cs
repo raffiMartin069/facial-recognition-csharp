@@ -139,7 +139,20 @@ namespace facial_recognition
 					GuardianTextBox.Text, CivilStatusComboBox.Text, WorkStatusComboBox.Text,
 					DateOfBirthTextBox.Text, imageBytes);
 
-				register.AddUser();
+				string refernceId = register.AddUser();
+
+				if(string.IsNullOrEmpty(refernceId))
+				{
+					MessageBox.Show("Registration failed. Please try again.");
+					return;
+				}
+
+				DialogResult dialogResult = MessageBox.Show($"Registration successful! Your reference ID is {refernceId}.", "Register Another User", MessageBoxButtons.YesNo);
+
+				if(dialogResult == DialogResult.Yes || dialogResult == DialogResult.No || dialogResult == DialogResult.Cancel)
+				{
+					Clear();
+				}
 			}
 			catch (Exception ex)
 			{

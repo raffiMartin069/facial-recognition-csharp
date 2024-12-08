@@ -15,7 +15,7 @@ namespace facial_recognition.Repository
 	{
 		FacialDataContext _context = new FacialDataContext();
 
-		public void AddUser(RegisterDto dto)
+		public string AddUser(RegisterDto dto)
 		{
 			using (var transaction = new TransactionScope())
 			{
@@ -39,6 +39,7 @@ namespace facial_recognition.Repository
 					_context.USERs.InsertOnSubmit(user);
 					_context.SubmitChanges();
 					transaction.Complete();
+					return user.REFERENCENUMBER.ToString();
 				}
 				catch (SqlException sqlEx)
 				{
