@@ -78,8 +78,8 @@ namespace facial_recognition.Utility
 			return image;
 		}
 
-		[Obsolete("This is method is will be soon removed, please use CompareFaces method instead", false)]
-		public Image<Bgr, byte> RecognizeFace(Image<Bgr, byte> inputImage, Image<Bgr, byte> trainedImage)
+		//[Obsolete("This is method is will be soon removed, please use CompareFaces method instead", false)]
+		public static Image<Bgr, byte> RecognizeFace(Image<Bgr, byte> inputImage, Image<Bgr, byte> trainedImage)
 		{
 			// Convert images to grayscale
 			var inputGray = inputImage.Convert<Gray, byte>();

@@ -8,6 +8,7 @@ using facial_recognition.Utility;
 using facial_recognition.View;
 using System;
 using System.Configuration;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -42,19 +43,25 @@ namespace facial_recognition
 
 		private void RegisterForm_Load(object sender, EventArgs e)
 		{
-			// TODO: This line of code loads data into the 'facialDataSet2.WORKSTATUS' table. You can move, or remove it, as needed.
-			this.wORKSTATUSTableAdapter.Fill(this.facialDataSet2.WORKSTATUS);
-			// TODO: This line of code loads data into the 'facialDataSet1.CIVILSTATUS' table. You can move, or remove it, as needed.
-			this.cIVILSTATUSTableAdapter.Fill(this.facialDataSet1.CIVILSTATUS);
-			// TODO: This line of code loads data into the 'facialDataSet.GENDER' table. You can move, or remove it, as needed.
-			this.gENDERTableAdapter.Fill(this.facialDataSet.GENDER);
-			// TODO: This line of code loads data into the 'facialDataSet2.WORKSTATUS' table. You can move, or remove it, as needed.
-			this.wORKSTATUSTableAdapter.Fill(this.facialDataSet2.WORKSTATUS);
-            // TODO: This line of code loads data into the 'facialDataSet1.CIVILSTATUS' table. You can move, or remove it, as needed.
-            this.cIVILSTATUSTableAdapter.Fill(this.facialDataSet1.CIVILSTATUS);
-            // TODO: This line of code loads data into the 'facialDataSet.GENDER' table. You can move, or remove it, as needed.
-            this.gENDERTableAdapter.Fill(this.facialDataSet.GENDER);
+			try
+			{
+				// TODO: This line of code loads data into the 'facialDataSet1.CIVILSTATUS' table. You can move, or remove it, as needed.
+				this.cIVILSTATUSTableAdapter.Fill(this.facialDataSet1.CIVILSTATUS);
+				// TODO: This line of code loads data into the 'facialDataSet.GENDER' table. You can move, or remove it, as needed.
+				this.gENDERTableAdapter.Fill(this.facialDataSet.GENDER);
+				// TODO: This line of code loads data into the 'facialDataSet2.WORKSTATUS' table. You can move, or remove it, as needed.
+				this.wORKSTATUSTableAdapter.Fill(this.facialDataSet2.WORKSTATUS);
+				// TODO: This line of code loads data into the 'facialDataSet1.CIVILSTATUS' table. You can move, or remove it, as needed.
+				this.cIVILSTATUSTableAdapter.Fill(this.facialDataSet1.CIVILSTATUS);
+				// TODO: This line of code loads data into the 'facialDataSet.GENDER' table. You can move, or remove it, as needed.
+				this.gENDERTableAdapter.Fill(this.facialDataSet.GENDER);
 
+			}
+			catch (Exception ex)
+			{
+				Debug.Print(ex.ToString());
+				MessageBox.Show("Unable to fetch data for drop downs.");
+			}
         }
 
         private void ProcessFrame(object sender, EventArgs e)

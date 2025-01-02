@@ -152,7 +152,7 @@ namespace facial_recognition.View
 					double similarity = RecognizerUtility.CompareFaces(uploadedFaceMat, storedFaceMat);
 
 					// If similarity exceeds threshold, it's a duplicate
-					if (similarity >= 0.6)  // Threshold for face comparison (adjust as necessary)
+					if (similarity >= 0.9)  // Threshold for face comparison (adjust as necessary)
 					{
 						int id = storedImage.Id;
 						Session.SetClaim("Id", id);
@@ -163,9 +163,15 @@ namespace facial_recognition.View
 						return;
 					}
 				}
+
+
 				MessageBox.Show("Face not recognized!");
+				// redirect to register form
+				var register = new RegisterForm();
+				register.Show();
+				this.Hide();
 			}
-			catch(Exception)
+			catch (Exception)
 			{
 				MessageBox.Show("Something went wrong. Please restart the application.");
 			}

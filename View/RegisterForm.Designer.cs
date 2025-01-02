@@ -164,10 +164,10 @@
 			this.label7.AutoSize = true;
 			this.label7.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
 			this.label7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.label7.Location = new System.Drawing.Point(398, 12);
+			this.label7.Location = new System.Drawing.Point(398, 11);
 			this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(386, 32);
+			this.label7.Size = new System.Drawing.Size(386, 35);
 			this.label7.TabIndex = 0;
 			this.label7.Text = "Create an Acccount Today!";
 			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -370,7 +370,7 @@
 			this.GenderComboBox.Name = "GenderComboBox";
 			this.GenderComboBox.Size = new System.Drawing.Size(172, 29);
 			this.GenderComboBox.TabIndex = 3;
-			this.GenderComboBox.ValueMember = "TYPE";
+			this.GenderComboBox.ValueMember = "ID";
 			// 
 			// label8
 			// 
@@ -520,7 +520,7 @@
 			this.ErrorLabel.Location = new System.Drawing.Point(9, 585);
 			this.ErrorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 5);
 			this.ErrorLabel.Name = "ErrorLabel";
-			this.ErrorLabel.Size = new System.Drawing.Size(375, 15);
+			this.ErrorLabel.Size = new System.Drawing.Size(375, 17);
 			this.ErrorLabel.TabIndex = 0;
 			this.ErrorLabel.Text = "Sample Error";
 			this.ErrorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -534,7 +534,7 @@
 			this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel5.Controls.Add(this.ClearFieldButton, 1, 0);
 			this.tableLayoutPanel5.Controls.Add(this.RegisterButton, 0, 0);
-			this.tableLayoutPanel5.Location = new System.Drawing.Point(8, 608);
+			this.tableLayoutPanel5.Location = new System.Drawing.Point(8, 610);
 			this.tableLayoutPanel5.Name = "tableLayoutPanel5";
 			this.tableLayoutPanel5.RowCount = 1;
 			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));

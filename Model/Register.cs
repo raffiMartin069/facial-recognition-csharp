@@ -178,8 +178,19 @@ namespace facial_recognition.Model
 			// check date of birth and age calculation if both matches
 			// example: today is December of 2024, the users age and date of birth should be 23 should be April 17, 2001
 			// if the date and year is April 17, 2025 then the age should be 24 if he/she is born in April 17, 2001.
-			if (DateTime.Now.Year - dob.Year != Convert.ToInt32(Age))
+			int calculatedAge = DateTime.Now.Year - dob.Year;
+
+			// Adjust if the current date is before the person's birthday this year
+			if (DateTime.Now < dob.AddYears(calculatedAge))
+			{
+				calculatedAge--;
+			}
+
+			if (calculatedAge != Convert.ToInt32(Age))
+			{
 				throw new Exception("Invalid Date of Birth.");
+			}
+
 		}
 
 		private void ValidateImage()
@@ -212,7 +223,7 @@ namespace facial_recognition.Model
 					double similarity = RecognizerUtility.CompareFaces(uploadedFaceMat, storedFaceMat);
 
 					// If similarity exceeds threshold, it's a duplicate
-					if (similarity >= 0.6)  // Threshold for face comparison (adjust as necessary)
+					if (similarity >= 0.9)  // Threshold for face comparison (adjust as necessary)
 					{
 						throw new Exception("This face already exists in the database.");
 					}

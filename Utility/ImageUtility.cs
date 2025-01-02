@@ -26,7 +26,7 @@ namespace facial_recognition.Utility
 
 		private static Bitmap ResizeImg(Bitmap image)
 		{
-			return new Bitmap(image, new Size(150, 150));
+			return new Bitmap(image, new Size(350, 350));
 		}
 
 		public static byte[] NormalizeImage(byte[] imageBytes)

@@ -33,19 +33,19 @@ namespace facial_recognition.Persistent.Data
     partial void InsertCIVILSTATUS(CIVILSTATUS instance);
     partial void UpdateCIVILSTATUS(CIVILSTATUS instance);
     partial void DeleteCIVILSTATUS(CIVILSTATUS instance);
-    partial void InsertWORKSTATUS(WORKSTATUS instance);
-    partial void UpdateWORKSTATUS(WORKSTATUS instance);
-    partial void DeleteWORKSTATUS(WORKSTATUS instance);
     partial void InsertGENDER(GENDER instance);
     partial void UpdateGENDER(GENDER instance);
     partial void DeleteGENDER(GENDER instance);
     partial void InsertUSER(USER instance);
     partial void UpdateUSER(USER instance);
     partial void DeleteUSER(USER instance);
+    partial void InsertWORKSTATUS(WORKSTATUS instance);
+    partial void UpdateWORKSTATUS(WORKSTATUS instance);
+    partial void DeleteWORKSTATUS(WORKSTATUS instance);
     #endregion
 		
 		public FacialDataContext() : 
-				base(global::facial_recognition.Properties.Settings.Default.FacialConnectionString, mappingSource)
+				base(global::facial_recognition.Properties.Settings.Default.FacialConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -82,14 +82,6 @@ namespace facial_recognition.Persistent.Data
 			}
 		}
 		
-		public System.Data.Linq.Table<WORKSTATUS> WORKSTATUS
-		{
-			get
-			{
-				return this.GetTable<WORKSTATUS>();
-			}
-		}
-		
 		public System.Data.Linq.Table<GENDER> GENDERs
 		{
 			get
@@ -103,6 +95,14 @@ namespace facial_recognition.Persistent.Data
 			get
 			{
 				return this.GetTable<USER>();
+			}
+		}
+		
+		public System.Data.Linq.Table<WORKSTATUS> WORKSTATUS
+		{
+			get
+			{
+				return this.GetTable<WORKSTATUS>();
 			}
 		}
 	}
@@ -128,92 +128,6 @@ namespace facial_recognition.Persistent.Data
     #endregion
 		
 		public CIVILSTATUS()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STATUS", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string STATUS
-		{
-			get
-			{
-				return this._STATUS;
-			}
-			set
-			{
-				if ((this._STATUS != value))
-				{
-					this.OnSTATUSChanging(value);
-					this.SendPropertyChanging();
-					this._STATUS = value;
-					this.SendPropertyChanged("STATUS");
-					this.OnSTATUSChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.WORKSTATUS")]
-	public partial class WORKSTATUS : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _STATUS;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnSTATUSChanging(string value);
-    partial void OnSTATUSChanged();
-    #endregion
-		
-		public WORKSTATUS()
 		{
 			OnCreated();
 		}
@@ -690,6 +604,92 @@ namespace facial_recognition.Persistent.Data
 					this._PROFILE = value;
 					this.SendPropertyChanged("PROFILE");
 					this.OnPROFILEChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.WORKSTATUS")]
+	public partial class WORKSTATUS : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _STATUS;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnSTATUSChanging(string value);
+    partial void OnSTATUSChanged();
+    #endregion
+		
+		public WORKSTATUS()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STATUS", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string STATUS
+		{
+			get
+			{
+				return this._STATUS;
+			}
+			set
+			{
+				if ((this._STATUS != value))
+				{
+					this.OnSTATUSChanging(value);
+					this.SendPropertyChanging();
+					this._STATUS = value;
+					this.SendPropertyChanged("STATUS");
+					this.OnSTATUSChanged();
 				}
 			}
 		}

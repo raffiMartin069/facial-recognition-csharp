@@ -83,7 +83,7 @@ namespace facial_recognition.View
 				DateOfBirthTextBox.Text = i.DateOfBirth.ToString();
 				pictureBox1.Image = i.ProfileImage;
 				Id = i.Id;
-				UpdateButton.Enabled = true;
+				//UpdateButton.Enabled = true;
 				ReferenceNumberTextBox.Text = i.ReferenceNumber;
 			}
 		}

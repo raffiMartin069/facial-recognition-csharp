@@ -33,5 +33,16 @@ namespace facial_recognition.Properties {
                 return ((string)(this["FacialConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOP-FJI8T9I3\\SQLEXPRESS;Initial Catalog=Facial;Integrated Security" +
+            "=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True")]
+        public string FacialConnectionString1 {
+            get {
+                return ((string)(this["FacialConnectionString1"]));
+            }
+        }
     }
 }
